@@ -111,8 +111,6 @@ theme: next
 deploy:
   type: git
   repo:
-    github: git@github.com:JiongZhu/JiongZhu.github.io.git,master
-    coding: git@git.coding.net:JiongZhu/JiongZhu.git,master
-#github: https://gh_token@github.com/JiongZhu/JiongZhu.github.io.git,master
-#coding: https://JiongZhu:cg_token@git.coding.net/JiongZhu/JiongZhu.git,master
+    github: https://gh_token@github.com/JiongZhu/JiongZhu.github.io.git,master
+    coding: https://JiongZhu:cg_token@git.coding.net/JiongZhu/JiongZhu.git,master
     
