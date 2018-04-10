@@ -1,10 +1,8 @@
 ---
-title: music
+title: 6#539音乐共享站
 date: 2018-04-10 18:41:25
 comments: true
 ---
-
-<h2>6#539音乐共享站</h2>
 
 #### 朱宣羽
 
@@ -22,7 +20,7 @@ comments: true
 
 <div class="aplayer" data-id="11100236" data-server="netease" data-type="playlist" data-mode="random"></div>
 
-### 分享说明
+#### 分享说明
 
 想分享音乐请至评论区按以下要求格式填写：
 
