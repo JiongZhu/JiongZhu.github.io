@@ -1,7 +1,6 @@
 ---
 title: music
 date: 2018-04-10 18:41:25
-type: music
 comments: true
 ---
 
