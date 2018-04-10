@@ -49,4 +49,3 @@
   #}{{ theme.footer.custom_text }}{#
 #}</div>
 {% endif %}
-<script src="https://cdn.jsdelivr.net/npm/meting@1.1.1/dist/Meting.min.js"></script>
