@@ -10,6 +10,8 @@ categories: IDE
 
 [TOC]
 
+<!-- more -->
+
 # 编辑[Editing]
 
 |            快捷键            |                   中文说明                   |
