@@ -6,7 +6,7 @@ comments: true
 
 #### 朱宣羽
 
-<div class="aplayer" data-id="373559" data-server="xiami" data-type="song"></div>
+<div class="aplayer" data-id="2180837181" data-server="netease" data-type="playlist"></div>
 
 #### 周定凯
 
