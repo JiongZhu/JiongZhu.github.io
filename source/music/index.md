@@ -21,5 +21,5 @@ password: 1529513
 
 <div class="aplayer" data-id="11100236" data-server="netease" data-type="playlist"></div>
 
-[分享教程](http://otmfpj0s2.bkt.clouddn.com/document/%E5%88%86%E4%BA%AB%E8%AF%B4%E6%98%8E.txt)
+[分享教程](http://otmfpj0s2.bkt.clouddn.com/document/%E5%88%86%E4%BA%AB%E8%AF%B4%E6%98%8E)
 
