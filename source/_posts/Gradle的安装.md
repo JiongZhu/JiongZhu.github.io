@@ -27,7 +27,7 @@ categories: Gradle
 
 Gradle可以在几乎所有的主流操作系统上运行，但是必须需要JDK7或者JRE7以上版本的支持。为了验证是否支持Gradle，请执行 ：
 
-```
+```bash
 java -version
 ```
 
@@ -47,19 +47,19 @@ OpenJDK 64-Bit Server VM (build 25.131-b11, mixed mode)
 
 基于Unix的系统可以通过SDKMAN安装
 
-```
+```bash
 $ sdk install gradle 4.3
 ```
 
 MacOS系统可以通过Homebrew安装
 
-```
+```bash
 $ brew update && brew install gradle
 ```
 
 Windows系统下可以通过Scoop安装
 
-```
+```bash
 $ scoop install gradle
 ```
 
@@ -80,7 +80,7 @@ $ scoop install gradle
 
 对于Linux和MacOS用户而言，可以解压zip文件到指定目录下：
 
-```
+```bash
 $ mkdir /opt/gradle
 $ unzip -d /opt/gradle gradle-4.3-bin.zip
 $ ls /opt/gradle/gradle-4.3
@@ -93,19 +93,19 @@ LICENSE  NOTICE  bin  getting-started.html  init.d  lib  media
 
 对于Linux和MacOS用户，运行命令
 
-```
+```bash
 sudo vi /etc/profile
 ```
 
 或者
 
-```
+```bash
 sudo gedit /etc/profile
 ```
 
 在文档末尾输入
 
-```
+```bash
 $ export PATH=$PATH:/opt/gradle/gradle-4.3/bin
 ```
 
@@ -115,7 +115,7 @@ $ export PATH=$PATH:/opt/gradle/gradle-4.3/bin
 
 打开一个控制台(或Windows命令提示符)并运行
 
-```
+```bash
 gradle -v
 ```
 

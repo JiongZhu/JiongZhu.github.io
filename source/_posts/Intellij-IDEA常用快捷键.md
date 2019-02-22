@@ -53,11 +53,50 @@ categories: IDE
 |         Ctrl + F4         |                 关闭当前标签页                  |
 |        Shift + F6         |              修改文件名字**（常用）**              |
 
+## Ctrl + Shift + Space 示例（智能补全）
+
+使用前，用于补全的列表，默认是以输入的关键字作为前缀的：
+
+![mark](http://cdn.zhuj.top/blog/20190222/bNim7mf6TiEj.png?imageslim)
+
+使用后，用于补全的列表，会把与输入的关键字最相关的信息排到最前面，比如这里的 Resource 的实现类会直接过滤出来，很方便吧 O(∩_∩)O~：
+
+![mark](http://cdn.zhuj.top/blog/20190222/RcilBvuN6KJr.png?imageslim)
+
+## Ctrl + P 示例（方法参数列表）
+
+![mark](http://cdn.zhuj.top/blog/20190222/nptjthcUvEIT.png?imageslim)
+
+## Ctrl + Q 示例（API 说明文档）
+
+![mark](http://cdn.zhuj.top/blog/20190222/CoWUQnnkhkDT.png?imageslim)
+
+不大好用，字体太小了，还不如直接 [ctrl + 点击] 看源代码来的方便！
+
+## Alt + Insert 示例（自动生成与类相关的代码）
+
+如果绑定了 Spring 框架，还能自动生成与 Spring 相关的依赖参数哦：
+
+![mark](http://cdn.zhuj.top/blog/20190222/aD5NiDOckIiW.png?imageslim)
+
+## Ctrl + O 示例（该类中所有覆盖或者实现的方法列表）
+
+![mark](http://cdn.zhuj.top/blog/20190222/tm0OixigiE0n.png?imageslim)
+
+## Ctrl + Alt + T 示例（生成具有环绕性质的代码）
+
+再强调一遍，使用前要先选择好需要环绕的代码块！没有选择代码块，还做环绕干嘛呢 O(∩_∩)O~ 
+![mark](http://cdn.zhuj.top/blog/20190222/BCptI9WCd6vC.png?imageslim)
+
+在右边的 Surround with 列表，就是目前支持的自动代码环绕功能，可以直接通过列表最左边的快捷键选择，是不是很方便呀 O(∩_∩)O~
+
+它还支持自定义的代码模板（Live templates）呢，很强大吧。
+
 ## Ctrl + Shift + V 示例（剪切或拷贝的代码历史记录中，选择粘贴的内容）
 
 这是一个很酷的功能 O(∩_∩)O~，它会把之前剪切或拷贝的代码历史记录（最近 5 条）展示出来，让你来选择哦。可惜的是，列表选项如果是中文会乱码，还好内容可以正常显示：
 
-![Markdown](http://i4.buimg.com/595449/4b7cd6db81122c6e.png)
+![mark](http://cdn.zhuj.top/blog/20190222/asjGaQiflGHy.png?imageslim)
 
 # 查找或替换[Search/Replace]
 
@@ -74,7 +113,7 @@ categories: IDE
 
 触发后，会打开一个查找面板：
 
-![Markdown](http://i1.piimg.com/595449/796ac02f42e82e3f.png)
+![mark](http://cdn.zhuj.top/blog/20190222/im6LGUSV3ER3.png?imageslim)
 
 具体含义如下：
 
@@ -94,19 +133,19 @@ categories: IDE
 
 勾选符号选中效果：
 
-![Markdown](http://i4.buimg.com/595449/384e3f366b84de9b.png)
+![mark](http://cdn.zhuj.top/blog/20190222/SmR25tuE813T.png?imageslim)
 
 点击文本内的向上箭头，打开后的查询结果列表面板：
 
-![Markdown](http://i4.buimg.com/595449/e440db6a85339fc4.png)
+![mark](http://cdn.zhuj.top/blog/20190222/RAHjDFfJm2QB.png?imageslim)
 
 两个框加一个向下箭头，会变成一个大文本输入框，而且还多出一个查看搜索历史的按钮：
 
-![Markdown](http://i1.piimg.com/595449/3204fc137322dbcd.png)
+![mark](http://cdn.zhuj.top/blog/20190222/XdM2QlosC8pg.png?imageslim)
 
 ## Ctrl + Shift + F （通过路径查找）
 
-![Markdown](http://i1.piimg.com/595449/f7aac9ffda70575b.png)
+![mark](http://cdn.zhuj.top/blog/20190222/QxXAOobQk8n2.png?imageslim)
 
 # 查看使用情况[Usage Search]
 
@@ -121,7 +160,7 @@ categories: IDE
 
 ## Ctrl + Alt + F7（打开使用情况列表）
 
-![Markdown](http://i1.piimg.com/595449/fa0e74106db40f3b.png)
+![mark](http://cdn.zhuj.top/blog/20190222/Xi1jL5yuIycs.png?imageslim)
 
 # 编译与运行【Compile and Run】
 
@@ -137,7 +176,7 @@ categories: IDE
 
 ## Alt + Shift + F10（打开运行列表，选择一个运行）
 
-![Markdown](http://i4.buimg.com/595449/e8e487fb026764bb.png)
+![mark](http://cdn.zhuj.top/blog/20190222/XxdTob9SoriB.png?imageslim)
 
 # 调试[Debugging]
 
@@ -155,17 +194,17 @@ categories: IDE
 
 ## Shift + F7（选择具体要跳入的类方法）
 
-![Markdown](http://i1.piimg.com/595449/eab37adca0da64c1.png)
+![mark](http://cdn.zhuj.top/blog/20190222/WmUcMOt8JwtP.png?imageslim)
 
 ## Alt + F8 （计算表达式）
 
 注意：要在当前断点之前的代码中，选择某一个变量运行才有效，因为只有代码运行过了，才会有值的呀 O(∩_∩)O~
 
-![Markdown](http://i1.piimg.com/595449/4ed11fa69389cfbc.png)
+![mark](http://cdn.zhuj.top/blog/20190222/MwuUIOlPhUFo.png?imageslim)
 
 ## Ctrl + Shift + F8 （当前断点的面板）
 
-![Markdown](http://i1.piimg.com/595449/ac158b7681b19541.png)
+![mark](http://cdn.zhuj.top/blog/20190222/Xj01cKoL8Qw7.png?imageslim)
 
 # 导航[Navigation]
 
@@ -207,7 +246,7 @@ categories: IDE
 
 键入类名的关键字，会自动出现相关的类哦，右侧还有一个勾选项，能够把引用的 jar 包中的类也加进来，很强大 O(∩_∩)O~
 
-![Markdown](http://i4.buimg.com/595449/2a48f4cf3a8eec09.png)
+![mark](http://cdn.zhuj.top/blog/20190222/2qtRgef60BNs.png?imageslim)
 
 ## Ctrl + Alt + 右箭头/左箭头（在曾经浏览过的代码行中来回跳）
 
@@ -217,29 +256,29 @@ categories: IDE
 
 1、控制面板-》显示-》屏幕分辨率：
 
-![Markdown](http://i4.buimg.com/595449/a4d39546c3dda874.png)
+![mark](http://cdn.zhuj.top/blog/20190222/hI3bCSnEP5hf.png?imageslim)
 
 2、点击【高级设置】-》核芯显卡控制面板：
 
-![Markdown](http://i4.buimg.com/595449/a21b6a3dc41af175.png)
+![mark](http://cdn.zhuj.top/blog/20190222/6Kdv9HalpI24.png?imageslim)
 
 3、图形属性-》选项与支持-》禁用所有快捷键（这些快捷键几乎没有什么用处！）
 
-![Markdown](http://i4.buimg.com/595449/a39f330e96c24b98.png)
+![mark](http://cdn.zhuj.top/blog/20190222/mHWdgmTeP0UX.png?imageslim)
 
 ## Alt + F1（打开一个类型列表）
 
-![Markdown](http://i4.buimg.com/595449/7fe3d9c71f3ef671.png)
+![mark](http://cdn.zhuj.top/blog/20190222/AUVghjUXt1JO.png?imageslim)
 
 ## F11（添加为书签或者从书签中删除）
 
 书签不是默认视图，所以我们要把它添加到当前视图中：View -> Tool Windows -> Favorites，打开 Favorites 面板：
 
-![Markdown](http://i1.piimg.com/595449/99ad73a00e3a99af.png)
+![mark](http://cdn.zhuj.top/blog/20190222/mbqsSaOh72Bv.png?imageslim)
 
 Favorites 面板中的 Bookmarks 就是我们添加的书签哦：
 
-![Markdown](http://i1.piimg.com/595449/1e3412d408390203.png)
+![mark](http://cdn.zhuj.top/blog/20190222/gOClC8bhfLHt.png?imageslim)
 
 或者直接使用 Shift + F11，打开书签列表也可以的哦 O(∩_∩)O~。
 
@@ -249,5 +288,5 @@ Favorites 面板中的 Bookmarks 就是我们添加的书签哦：
 
 注意不要选择面板提供的 26 个大写字母，因为这会与 idea 的其他快捷键冲突，不知道 idea 为什么要把它们放在这里？好奇怪 O(∩_∩)O~
 
-![Markdown](http://i1.piimg.com/595449/896c6087500f064d.png)
+![mark](http://cdn.zhuj.top/blog/20190222/csU9xqchmBPH.png?imageslim)
 

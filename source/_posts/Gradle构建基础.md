@@ -52,7 +52,7 @@ Hello world!
 
 build.gradle
 
-```
+```groovy
 task hello << {
 	println 'Hello world!'
 }
@@ -65,7 +65,7 @@ task hello << {
 Gradle 脚本采用 Groovy 书写，作为开胃菜,看下下面这几个例子。
 build.gradle
 
-```
+```groovy
 task upper << {
 	String someString = 'mY_nAmE'
 	println "Original: " + someString
@@ -86,7 +86,7 @@ Upper case: MY_NAME
 
 build.gradle
 
-```
+```groovy
 task count << {
     4.times { print "$it " }
 }
@@ -105,7 +105,7 @@ task count << {
 
 build.gradle
 
-```
+```groovy
 task hello << {
 	println 'Hello world!'
 }
@@ -128,7 +128,7 @@ I'm Gradle
 
 build.gradle
 
-```
+```groovy
 task taskX(dependsOn: 'taskY') << {
     println 'taskX'
 }
@@ -154,7 +154,7 @@ taskX
 
 build.gradle
 
-```
+```groovy
 4.times { counter ->
     task "task$counter" << {
         println "I'm task number $counter"
@@ -177,7 +177,7 @@ I'm task number 1
 
 build.gradle
 
-```
+```groovy
 4.times { counter ->
     task "task$counter" << {
         println "I'm task number $counter"
@@ -199,7 +199,7 @@ I'm task number 0
 
 build.gradle
 
-```
+```groovy
 task hello << {
     println 'Hello Earth'
 }
@@ -232,7 +232,7 @@ doFirst 和 doLast 可以进行多次调用。他们分别被添加在任务的�
 
 build.gradle
 
-```
+```groovy
 task hello << {
     println 'Hello world!'
 }
@@ -257,7 +257,7 @@ Greetings from the hello task.
 
 build.gradle
 
-```
+```groovy
 task myTask {
     ext.myProperty = "myValue"
 }
@@ -282,7 +282,7 @@ Ant 任务是 Gradle 中的一等公民。Gradle 借助 Groovy 对 Ant 任务进
 
 build.gradle
 
-```
+```groovy
 task loadfile << {
     def files = file('../antLoadfileResources').listFiles().sort()
     files.each { File file ->
@@ -316,7 +316,7 @@ Gradle 的强大要看你如何编写脚本逻辑。针对上面的例子，首�
 
 build.gradle
 
-```
+```groovy
 task checksum << {
     fileList('../antLoadfileResources').each {File file ->
         ant.checksum(file: file, property: "cs_$file.name")
@@ -349,7 +349,7 @@ Gradle 允许在脚本中定义多个默认任务。
 
 build.gradle
 
-```
+```groovy
 defaultTasks 'clean', 'run'
 task clean << {
     println 'Default Cleaning!'
@@ -380,7 +380,7 @@ Default Running!
 
 build.gradle
 
-```
+```groovy
 task distribution << {
     println "We build the zip with version=$version"
 }

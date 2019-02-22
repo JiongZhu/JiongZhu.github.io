@@ -55,7 +55,7 @@ categories: Gradle
 
 ivy.xml
 
-```
+```xml
 <ivy-module version="2.0">  
     <info organisation="org.apache" module="java-build-tools"/>  
     <dependencies>  
@@ -69,7 +69,7 @@ ivy.xml
 
 build.xml
 
-```
+```xaml
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="java-build-tools" default="jar">
 	
 	<property name="src.dir" value="src"/>  
@@ -113,7 +113,7 @@ ant jar
 
 pom.xml
 
-```
+```xaml
 <project xmlns="http://maven.apache.org/POM/4.0.0"  
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -161,7 +161,7 @@ mvn package
 
 pom.xml
 
-```
+```xml
 <plugin>  
     <groupId>org.apache.maven.plugins</groupId>  
     <artifactId>maven-checkstyle-plugin</artifactId>  
@@ -217,7 +217,7 @@ mvn verify
 
 build.gradle
 
-```
+```groovy
 apply plugin: 'java'  
 apply plugin: 'checkstyle'  
 apply plugin: 'findbugs'  
@@ -247,7 +247,7 @@ gradle tasks --all
 
 build.gradle
 
-```
+```groovy
 apply plugin: 'java'
 ```
 

@@ -11,7 +11,7 @@ categories: Gradle
 基于web3.1配置，主要包含log4j的监听与配置、编码过滤、spring监听、springMVC与mybatis配置文件的定位、错误页面配置等。
 <!-- more -->
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -166,7 +166,7 @@ jdbc.filters = stat
 
 主要配置了控制器自动扫描、启用注解驱动、静态资源映射、springMVC注解、jsp与htm视图解析等。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -258,7 +258,7 @@ jdbc.filters = stat
 
 主要配置了service的自动扫描、数据库连接池的配置、mybatis实体接口与实体映射文件的扫描等。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -355,7 +355,7 @@ gererator.schema=jiongzhu
 
 mybatisGenerator的具体配置，关于mybatisGenerator相关运用可以自行百度。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
@@ -444,7 +444,7 @@ mybatisGenerator的具体配置，关于mybatisGenerator相关运用可以自行
 
 首先是User.java实体类，手动加入了lombok，代码得到简化，关于lombok使用可以自行百度，比如这里我在类上使用了lombok包的@Getter、@Setter注解，则在编译生成.class文件时会对类下的所有成员变量自动生产set与get方法。
 
-```
+```java
 package com.jiongzhu.model;
 
 import lombok.Getter;
@@ -484,7 +484,7 @@ public class User {
 
 然后是UserMapper.java接口，继承自通用Mapper，通用Mapper中包含了许多常用的增删改查与统计方法。
 
-```
+```java
 package com.jiongzhu.mapper;
 
 import com.jiongzhu.model.User;
@@ -496,7 +496,7 @@ public interface UserMapper extends Mapper<User> {
 
 最后是UserMapper.xml实体映射文件，
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiongzhu.mapper.UserMapper">
@@ -520,7 +520,7 @@ public interface UserMapper extends Mapper<User> {
 
 结合通用mapper接口自行编写，使用起来非常方便。
 
-```
+```java
 package com.jiongzhu.service;
 
 import org.apache.ibatis.annotations.Param;
@@ -720,7 +720,7 @@ public abstract class BaseService<T>{
 
 下面展示一下，UserService.java内容，当继承了通用service之后，已经继承了所有的通用方法，当然自己可以重写任意方法和自己添加父类没有实现的方法。
 
-```
+```java
 package com.jiongzhu.service;
 
 import com.jiongzhu.model.User;

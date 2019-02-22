@@ -12,7 +12,7 @@ categories: Gradle
 <!-- more -->
 ## 文件详细配置
 
-```
+```groovy
 group 'com.jiongzhu'
 version '1.0-SNAPSHOT'
 
