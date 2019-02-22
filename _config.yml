@@ -99,9 +99,9 @@ qiniu:
     folder: blog
     extend: 
   js:
-    folder: blog
+    folder: js
   css:
-    folder: blog
+    folder: css
 
 ## Themes: https://hexo.io/themes/
 theme: next
