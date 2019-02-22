@@ -90,7 +90,7 @@ qiniu:
   bucket: cdn.zhuj.top
   access_key: umLZOZJMlpYtrGr8RrzAi_astiJ8OUJ2CQ8Zle-6
   secret_key: otSpQEVsee0h4-GC-QaBmEedpyqfz82aD2GlYO91
-  dirPrefix: /
+  dirPrefix: 
   urlPrefix: http://cdn.zhuj.top/
   up_host: http://upload.qiniu.com
   local_dir: static
