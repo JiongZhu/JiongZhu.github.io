@@ -1,0 +1,316 @@
+<!DOCTYPE html><html class="theme-next mist use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script></script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3"><link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222"><meta name="keywords" content="Gradle,"><meta name="description" content="Projects 和 tasksprojects 和 tasks是 Gradle 中最重要的两个概念。任何一个 Gradle 构建都是由一个或多个 projects 组成。每个 project 包括许多可构建组成部分。 这完全取决于你要构建些什么。举个例子，每个 project 或许是一个 jar 包或者一个 web 应用，它也可以是一个由许多其他项目中产生的 jar 构成的 zip 压缩包。一个"><meta name="keywords" content="Gradle"><meta property="og:type" content="article"><meta property="og:title" content="Gradle构建基础"><meta property="og:url" content="http://zhuxuanyu.top/2017/11/03/Gradle构建基础/index.html"><meta property="og:site_name" content="老井の博客"><meta property="og:description" content="Projects 和 tasksprojects 和 tasks是 Gradle 中最重要的两个概念。任何一个 Gradle 构建都是由一个或多个 projects 组成。每个 project 包括许多可构建组成部分。 这完全取决于你要构建些什么。举个例子，每个 project 或许是一个 jar 包或者一个 web 应用，它也可以是一个由许多其他项目中产生的 jar 构成的 zip 压缩包。一个"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2019-03-26T04:16:28.934Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Gradle构建基础"><meta name="twitter:description" content="Projects 和 tasksprojects 和 tasks是 Gradle 中最重要的两个概念。任何一个 Gradle 构建都是由一个或多个 projects 组成。每个 project 包括许多可构建组成部分。 这完全取决于你要构建些什么。举个例子，每个 project 或许是一个 jar 包或者一个 web 应用，它也可以是一个由许多其他项目中产生的 jar 构成的 zip 压缩包。一个"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Mist",version:"5.1.3",sidebar:{position:"left",display:"hide",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://zhuxuanyu.top/2017/11/03/Gradle构建基础/"><title>Gradle构建基础 | 老井の博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?3f1a9437a901aacbfaa67f578feb5b78";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div> <a href="https://github.com/you"><img style="position:absolute;top:0;left:0;border:0" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">老井の博客</span><span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">学习&生活</h1></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i><br> 公益404</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav><script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.6.0/APlayer.min.js"></script></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://zhuxuanyu.top/2017/11/03/Gradle构建基础/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Jiong-ZH"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="老井の博客"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">Gradle构建基础</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T15:10:31+08:00">2017-11-03</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Gradle/" itemprop="url" rel="index"><span itemprop="name">Gradle</span></a></span></span> <span class="post-meta-divider">|</span> <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i><span class="busuanzi-value" id="busuanzi_value_page_pv"></span> 次</span><div class="post-wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">字数统计&#58;</span> <span title="字数统计">2,381</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">10</span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="Projects-和-tasks"><a href="#Projects-和-tasks" class="headerlink" title="Projects 和 tasks"></a>Projects 和 tasks</h2><p>projects 和 tasks是 Gradle 中最重要的两个概念。<br>任何一个 Gradle 构建都是由一个或多个 projects 组成。每个 project 包括许多可构建组成部分。 这完全取决于你要构建些什么。举个例子，每个 project 或许是一个 jar 包或者一个 web 应用，它也可以是一个由许多其他项目中产生的 jar 构成的 zip 压缩包。一个 project 不必描述它只能进行构建操作。它也可以部署你的应用或搭建你的环境。不要担心它像听上去的那样庞大。 Gradle 的 build-by-convention 可以让您来具体定义一个 project 到底该做什么。<br>每个 project 都由多个 tasks 组成。每个 task 都代表了构建执行过程中的一个原子性操作。如编译，打包，生成 javadoc，发布到某个仓库等操作。<br>到目前为止，可以发现我们可以在一个 project 中定义一些简单任务，后续章节将会阐述多项目构建和多项目多任务的内容。<br><a id="more"></a></p><h3 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello world"></a>Hello world</h3><p>你可以通过在命令行运行 gradle 命令来执行构建，gradle 命令会从当前目录下寻找 build.gradle 文件来执行构建。我们称 build.gradle 文件为构建脚本。严格来说这其实是一个构建配置脚本，后面你会了解到这个构建脚本定义了一个 project 和一些默认的 task。<br>你可以创建如下脚本到 build.gradle 中，第一个构建脚本</p><p>build.gradle</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> hello &#123;</span><br><span class="line">     <span class="keyword">doLast</span> &#123;</span><br><span class="line">     	<span class="keyword">println</span> <span class="string">'Hello world!'</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后在该文件所在目录执行 gradle -q hello</p><blockquote><p>-q 参数的作用是什么?</p><p>该文档的示例中很多地方在调用 gradle 命令时都加了 -q 参数。该参数用来控制 gradle 的日志级别，可以保证只输出我们需要的内容。</p></blockquote><p>执行脚本</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Output of gradle -<span class="selector-tag">q</span> hello</span><br><span class="line">&gt; gradle -<span class="selector-tag">q</span> hello</span><br><span class="line">Hello world!</span><br></pre></td></tr></table></figure><p>上面的脚本定义了一个叫做 hello 的 task，并且给它添加了一个动作。当执行 gradle hello 的时候, Gralde 便会去调用 hello 这个任务来执行给定操作。这些操作其实就是一个用 groovy 书写的闭包。</p><p>如果你觉得它看上去跟 Ant 中的 targets 很像，那么是对的。Gradle 的 tasks 就相当于 Ant 中的 targets。不过你会发现他功能更加强大。我们只是换了一个比 target 更形象的另外一个术语。不幸的是这恰巧与 Ant 中的术语有些冲突。ant 命令中有诸如 javac、copy、tasks。所以当该文档中提及 tasks 时，除非特别指明 ant task。否则指的均是指 Gradle 中的 tasks。</p><h3 id="快速定义任务"><a href="#快速定义任务" class="headerlink" title="快速定义任务"></a>快速定义任务</h3><p>用一种更简洁的方式来定义上面的 hello 任务。</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task hello &lt;&lt; &#123;</span><br><span class="line">	println <span class="string">'Hello world!'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面的脚本又一次采用闭包的方式来定义了一个叫做 hello 的任务，本文档后续部分中我们将会更多的采用这种风格来定义任务。</p><h3 id="代码即脚本"><a href="#代码即脚本" class="headerlink" title="代码即脚本"></a>代码即脚本</h3><p>Gradle 脚本采用 Groovy 书写，作为开胃菜,看下下面这几个例子。<br>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">task upper &lt;&lt; &#123;</span><br><span class="line">	String someString = <span class="string">'mY_nAmE'</span></span><br><span class="line">	println <span class="string">"Original: "</span> + someString</span><br><span class="line">	println <span class="string">"Upper case: "</span> + someString.toUpperCase()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt; gradle -q upper</span></span><br><span class="line"><span class="string"></span><span class="attr">Original:</span> <span class="string">mY_nAmE</span></span><br><span class="line"><span class="string">Upper</span> <span class="attr">case:</span> <span class="string">MY_NAME</span></span><br></pre></td></tr></table></figure><p>或者</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task count &lt;&lt; &#123;</span><br><span class="line">    <span class="number">4.</span>times &#123; print <span class="string">"$it "</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q count</span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br></pre></td></tr></table></figure><h3 id="任务依赖"><a href="#任务依赖" class="headerlink" title="任务依赖"></a>任务依赖</h3><p>你可以按如下方式创建任务间的依赖关系，在两个任务之间指明依赖关系</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task hello &lt;&lt; &#123;</span><br><span class="line">	println <span class="string">'Hello world!'</span></span><br><span class="line">&#125;</span><br><span class="line">task intro(<span class="string">dependsOn:</span> hello) &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">"I'm Gradle"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> gradle -q intro</span></span><br><span class="line">Hello world!</span><br><span class="line">I'm Gradle</span><br></pre></td></tr></table></figure><p>添加依赖 task 也可以不必首先声明被依赖的 task。</p><h3 id="延迟依赖"><a href="#延迟依赖" class="headerlink" title="延迟依赖"></a>延迟依赖</h3><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task taskX(<span class="string">dependsOn:</span> <span class="string">'taskY'</span>) &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'taskX'</span></span><br><span class="line">&#125;</span><br><span class="line">task taskY &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'taskY'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> gradle -q taskX</span></span><br><span class="line">taskY</span><br><span class="line">taskX</span><br></pre></td></tr></table></figure><p>可以看到，taskX 是 在 taskY 之前定义的，这在多项目构建中非常有用。<br>注意:当引用的任务尚未定义的时候不可使用短标记法来运行任务。</p><h3 id="动态任务"><a href="#动态任务" class="headerlink" title="动态任务"></a>动态任务</h3><p>借助 Groovy 的强大不仅可以定义简单任务还能做更多的事。例如，可以动态定义任务。</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.</span>times &#123; counter -&gt;</span><br><span class="line">    task <span class="string">"task$counter"</span> &lt;&lt; &#123;</span><br><span class="line">        println <span class="string">"I'm task number $counter"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q task1</span><br><span class="line">I<span class="symbol">'m</span> <span class="keyword">task</span> number <span class="number">1</span></span><br></pre></td></tr></table></figure><h3 id="任务操纵"><a href="#任务操纵" class="headerlink" title="任务操纵"></a>任务操纵</h3><p>一旦任务被创建后，任务之间可以通过 API 进行相互访问。这也是与 Ant 的不同之处。比如可以增加一些依赖。</p><h4 id="通过-API-进行任务之间的通信-增加依赖"><a href="#通过-API-进行任务之间的通信-增加依赖" class="headerlink" title="通过 API 进行任务之间的通信 - 增加依赖"></a>通过 API 进行任务之间的通信 - 增加依赖</h4><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.</span>times &#123; counter -&gt;</span><br><span class="line">    task <span class="string">"task$counter"</span> &lt;&lt; &#123;</span><br><span class="line">        println <span class="string">"I'm task number $counter"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">task0.dependsOn task2, task3</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q task0</span><br><span class="line">I<span class="symbol">'m</span> <span class="keyword">task</span> number <span class="number">2</span></span><br><span class="line">I<span class="symbol">'m</span> <span class="keyword">task</span> number <span class="number">3</span></span><br><span class="line">I<span class="symbol">'m</span> <span class="keyword">task</span> number <span class="number">0</span></span><br></pre></td></tr></table></figure><h4 id="通过-API-进行任务之间的通信-增加任务行为"><a href="#通过-API-进行任务之间的通信-增加任务行为" class="headerlink" title="通过 API 进行任务之间的通信 - 增加任务行为"></a>通过 API 进行任务之间的通信 - 增加任务行为</h4><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">task hello &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'Hello Earth'</span></span><br><span class="line">&#125;</span><br><span class="line">hello.doFirst &#123;</span><br><span class="line">    println <span class="string">'Hello Venus'</span></span><br><span class="line">&#125;</span><br><span class="line">hello.doLast &#123;</span><br><span class="line">    println <span class="string">'Hello Mars'</span></span><br><span class="line">&#125;</span><br><span class="line">hello &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'Hello Jupiter'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> gradle -q hello</span></span><br><span class="line">Hello Venus</span><br><span class="line">Hello Earth</span><br><span class="line">Hello Mars</span><br><span class="line">Hello Jupiter</span><br></pre></td></tr></table></figure><p>doFirst 和 doLast 可以进行多次调用。他们分别被添加在任务的开头和结尾。当任务开始执行时这些动作会按照既定顺序进行。其中 &lt;&lt; 操作符 是 doLast 的简写方式。</p><h4 id="短标记法"><a href="#短标记法" class="headerlink" title="短标记法"></a>短标记法</h4><p>你早就注意到了吧，没错，每个任务都是一个脚本的属性，你可以访问它:</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task hello &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'Hello world!'</span></span><br><span class="line">&#125;</span><br><span class="line">hello.doLast &#123;</span><br><span class="line">    println <span class="string">"Greetings from the $hello.name task."</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q hello</span><br><span class="line">Hello world!</span><br><span class="line">Greetings <span class="keyword">from</span> the hello <span class="keyword">task</span>.</span><br></pre></td></tr></table></figure><p>对于插件提供的内置任务。这尤其方便(例如:complie)</p><h3 id="增加自定义属性"><a href="#增加自定义属性" class="headerlink" title="增加自定义属性"></a>增加自定义属性</h3><p>你可以为一个任务添加额外的属性。例如,新增一个叫做 myProperty 的属性，用 ext.myProperty 的方式给他一个初始值，这样便增加了一个自定义属性。</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task myTask &#123;</span><br><span class="line">    ext.myProperty = <span class="string">"myValue"</span></span><br><span class="line">&#125;</span><br><span class="line">task printTaskProperties &lt;&lt; &#123;</span><br><span class="line">    println myTask.myProperty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> gradle -q printTaskProperties</span></span><br><span class="line">myValue</span><br></pre></td></tr></table></figure><p>自定义属性不仅仅局限于任务上，还可以做更多事情。</p><h3 id="调用-Ant-任务"><a href="#调用-Ant-任务" class="headerlink" title="调用 Ant 任务"></a>调用 Ant 任务</h3><p>Ant 任务是 Gradle 中的一等公民。Gradle 借助 Groovy 对 Ant 任务进行了优秀的整合。Gradle 自带了一个 AntBuilder，在 Gradle 中调用 Ant 任务比在 build.xml 中调用更加的方便和强大。 通过下面的例子你可以学到如何调用一个 Ant 任务以及如何与 Ant 中的属性进行通信。<br><strong>利用 AntBuilder 执行 ant.loadfile</strong></p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">task loadfile &lt;&lt; &#123;</span><br><span class="line">    <span class="keyword">def</span> files = file(<span class="string">'../antLoadfileResources'</span>).listFiles().sort()</span><br><span class="line">    files.each &#123; File file -&gt;</span><br><span class="line">        <span class="keyword">if</span> (file.isFile()) &#123;</span><br><span class="line">            ant.loadfile(<span class="string">srcFile:</span> file, <span class="string">property:</span> file.name)</span><br><span class="line">            println <span class="string">" *** $file.name ***"</span></span><br><span class="line">            println <span class="string">"$&#123;ant.properties[file.name]&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q loadfile</span><br><span class="line">*** agile.manifesto.txt ***</span><br><span class="line">Individuals <span class="keyword">and</span> interactions over processes <span class="keyword">and</span> tools</span><br><span class="line">Working software over comprehensive documentation</span><br><span class="line">Customer collaboration  over contract negotiation</span><br><span class="line">Responding <span class="keyword">to</span> change over following a plan</span><br><span class="line"> *** gradle.manifesto.txt ***</span><br><span class="line">Make the impossible possible, make the possible easy <span class="keyword">and</span> make the easy elegant.</span><br><span class="line">(inspired by Moshe Feldenkrais)</span><br></pre></td></tr></table></figure><h3 id="方法抽取"><a href="#方法抽取" class="headerlink" title="方法抽取"></a>方法抽取</h3><p>Gradle 的强大要看你如何编写脚本逻辑。针对上面的例子，首先要做的就是要抽取方法。<br><strong>利用方法组织脚本逻辑</strong></p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">task checksum &lt;&lt; &#123;</span><br><span class="line">    fileList(<span class="string">'../antLoadfileResources'</span>).each &#123;File file -&gt;</span><br><span class="line">        ant.checksum(<span class="string">file:</span> file, <span class="string">property:</span> <span class="string">"cs_$file.name"</span>)</span><br><span class="line">        println <span class="string">"$file.name Checksum: $&#123;ant.properties["</span>cs_$file.name<span class="string">"]&#125;"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">task loadfile &lt;&lt; &#123;</span><br><span class="line">    fileList(<span class="string">'../antLoadfileResources'</span>).each &#123;File file -&gt;</span><br><span class="line">        ant.loadfile(<span class="string">srcFile:</span> file, <span class="string">property:</span> file.name)</span><br><span class="line">        println <span class="string">"I'm fond of $file.name"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">File[] fileList(String dir) &#123;</span><br><span class="line">    file(dir).listFiles(&#123;file -&gt; file.isFile() &#125; <span class="keyword">as</span> FileFilter).sort()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q loadfile</span><br><span class="line">I<span class="symbol">'m</span> fond <span class="keyword">of</span> agile.manifesto.txt</span><br><span class="line">I<span class="symbol">'m</span> fond <span class="keyword">of</span> gradle.manifesto.txt</span><br></pre></td></tr></table></figure><p>在后面的章节你会看到类似出去出来的方法可以在多项目构建中的子项目中调用。无论构建逻辑多复杂，Gradle 都可以提供给你一种简便的方式来组织它们。<br><strong>定义默认任务</strong></p><p>Gradle 允许在脚本中定义多个默认任务。</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">defaultTasks <span class="string">'clean'</span>, <span class="string">'run'</span></span><br><span class="line">task clean &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'Default Cleaning!'</span></span><br><span class="line">&#125;</span><br><span class="line">task run &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'Default Running!'</span></span><br><span class="line">&#125;</span><br><span class="line">task other &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">"I'm not a default task!"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q</span><br><span class="line">Default Cleaning!</span><br><span class="line">Default Running!</span><br></pre></td></tr></table></figure><p>这与直接调用 gradle clean run 效果是一样的。在多项目构建中，每个子项目都可以指定单独的默认任务。如果子项目未进行指定将会调用父项目指定的的默认任务。</p><h2 id="Configure-by-DAG"><a href="#Configure-by-DAG" class="headerlink" title="Configure by DAG"></a>Configure by DAG</h2><p>稍后会对 Gradle 的配置阶段和运行阶段进行详细说明 配置阶段后，Gradle 会了解所有要执行的任务 Gradle 提供了一个钩子来捕获这些信息。一个例子就是可以检查已经执行的任务中有没有被释放。借由此，你可以为一些变量赋予不同的值。<br>在下面的例子中，为 distribution 和 release 任务赋予了不同的 version 值。<br>依赖任务的不同输出</p><p>build.gradle</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">task distribution &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">"We build the zip with version=$version"</span></span><br><span class="line">&#125;</span><br><span class="line">task release(<span class="string">dependsOn:</span> <span class="string">'distribution'</span>) &lt;&lt; &#123;</span><br><span class="line">    println <span class="string">'We release now'</span></span><br><span class="line">&#125;</span><br><span class="line">gradle.taskGraph.whenReady &#123;taskGraph -&gt;</span><br><span class="line">    <span class="keyword">if</span> (taskGraph.hasTask(release)) &#123;</span><br><span class="line">        version = <span class="string">'1.0'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        version = <span class="string">'1.0-SNAPSHOT'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q distribution</span><br><span class="line">We build <span class="keyword">the</span> zip <span class="keyword">with</span> <span class="built_in">version</span>=<span class="number">1.0</span>-SNAPSHOT</span><br></pre></td></tr></table></figure><p>执行脚本</p><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; gradle -q release</span><br><span class="line">We build <span class="keyword">the</span> zip <span class="keyword">with</span> <span class="built_in">version</span>=<span class="number">1.0</span></span><br><span class="line">We release now</span><br></pre></td></tr></table></figure><p>whenReady 会在已发布的任务之前影响到已发布任务的执行。即使已发布的任务不是主要任务(也就是说，即使这个任务不是通过命令行直接调用)</p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div><div class="my_post_copyright"><script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script><script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script><script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script><link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css"><p><span>本文标题:</span><a href="/2017/11/03/Gradle构建基础/">Gradle构建基础</a></p><p><span>文章作者:</span><a href="/" title="访问 Jiong-ZH 的个人博客">Jiong-ZH</a></p><p><span>发布时间:</span>2017年11月03日 - 15:11</p><p><span>最后更新:</span>2019年03月26日 - 04:03</p><p><span>原始链接:</span><a href="/2017/11/03/Gradle构建基础/" title="Gradle构建基础">http://zhuxuanyu.top/2017/11/03/Gradle构建基础/</a><span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://zhuxuanyu.top/2017/11/03/Gradle构建基础/" aria-label="复制成功！"></i></span></p><p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p></div><script>var clipboard=new Clipboard(".fa-clipboard");clipboard.on("success",$(function(){$(".fa-clipboard").click(function(){swal({title:"",text:"复制成功",html:!1,timer:500,showConfirmButton:!1})})}))</script></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/donate.png" alt="Jiong-ZH 微信、支付宝、QQ"><p>微信、支付宝、QQ</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Gradle/" rel="tag"><i class="fa fa-tag"></i> Gradle</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/11/03/Gradle的安装/" rel="next" title="Gradle的安装"><i class="fa fa-chevron-left"></i> Gradle的安装</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2017/11/03/Gradle+IntelliJ-IDEA-2017-2创建Java-Web项目/" rel="prev" title="Gradle+IntelliJ-IDEA-2017-2创建Java-Web项目">Gradle+IntelliJ-IDEA-2017-2创建Java-Web项目<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC8zMzIyNy85Nzg0"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jiong-ZH"><p class="site-author-name" itemprop="name">Jiong-ZH</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">8</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">2</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/jiongzhu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:wwwzhxytop@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-block"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="http://example.com/" title="Title" target="_blank">Title</a></li></ul></div><div id="music163player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=38358214&auto=0&height=66"></iframe></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Projects-和-tasks"><span class="nav-number">1.</span> <span class="nav-text">Projects 和 tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-world"><span class="nav-number">1.1.</span> <span class="nav-text">Hello world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速定义任务"><span class="nav-number">1.2.</span> <span class="nav-text">快速定义任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码即脚本"><span class="nav-number">1.3.</span> <span class="nav-text">代码即脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务依赖"><span class="nav-number">1.4.</span> <span class="nav-text">任务依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟依赖"><span class="nav-number">1.5.</span> <span class="nav-text">延迟依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态任务"><span class="nav-number">1.6.</span> <span class="nav-text">动态任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务操纵"><span class="nav-number">1.7.</span> <span class="nav-text">任务操纵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-API-进行任务之间的通信-增加依赖"><span class="nav-number">1.7.1.</span> <span class="nav-text">通过 API 进行任务之间的通信 - 增加依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-API-进行任务之间的通信-增加任务行为"><span class="nav-number">1.7.2.</span> <span class="nav-text">通过 API 进行任务之间的通信 - 增加任务行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#短标记法"><span class="nav-number">1.7.3.</span> <span class="nav-text">短标记法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加自定义属性"><span class="nav-number">1.8.</span> <span class="nav-text">增加自定义属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用-Ant-任务"><span class="nav-number">1.9.</span> <span class="nav-text">调用 Ant 任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法抽取"><span class="nav-number">1.10.</span> <span class="nav-text">方法抽取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-by-DAG"><span class="nav-number">2.</span> <span class="nav-text">Configure by DAG</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span><span class="with-love"><i class="fa fa-love"></i></span> <span class="author" itemprop="copyrightHolder">Jiong-ZH</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span class="post-meta-item-text">Site words total count&#58;</span> <span title="Site words total count">16.9k</span> <span class="post-count">博客全站共16.9k字</span></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人次</span> <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次</span></div><script src="https://cdn.jsdelivr.net/npm/meting@1.0.1/dist/Meting.min.js"></script></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/three-waves.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><script type="text/javascript" src="/js/src/love.js"></script></body></html>
